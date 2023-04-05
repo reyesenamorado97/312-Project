@@ -1,0 +1,66 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Decide on the name in the tab here -->
+		<title>Top Hat Clone (NAME TBD)</title>
+
+		<!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+		<!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+
+		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+		<!-- Grab the navbar content from /src/navbar/navbar.html -->
+		<script>
+			$(function () {
+				$("#navbarContent").load("/src/navbar/navbar.html");
+			});
+		</script>
+	</head>
+
+	<!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+	<body>
+		<!-- NavBar -->
+		<div id="navbarContent"></div>
+
+		<!-- Page Title -->
+		<h1 class="section is-size-1-desktop is-size-3-mobile pb-3">Top Hat Clone</h1>
+
+		<!-- Landing Page Description -->
+		<div class="section pt-1 pb-0 mx-1">
+			<div class="container">
+				<div class="columns is-vcentered">
+					<div class="column is-5 is-size-5-desktop is-size-6-mobile">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+							ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+							fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+							mollit anim id est laborum.
+						</p>
+
+						<div class="buttons is-centered">
+							<div class="my-5">
+								<button class="button is-medium is-primary is-rounded" onclick="window.location.href='/src/login/login.html';">
+									Login
+								</button>
+
+								<button class="button is-medium is-info is-rounded" onclick="window.location.href='/src/signup/signup.html';">Signup</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="column">
+						<img src="/images/hero.jpg" alt="hero image" style="max-height: 650px" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>
