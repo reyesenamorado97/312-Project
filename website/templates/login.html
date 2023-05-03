@@ -32,7 +32,13 @@
 
 		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var email = $('#email');
+				(function() {console.log(email)
+				});
+			});
+		</script>
 		<!-- Grab the navbar content from /src/navbar/navbar.html -->
 		<script>
 			$(function () {
@@ -56,22 +62,12 @@
 						<div class="columns is-centered">
 							<div class="column  is-4-desktop is-3-widescreen my-6 py-6 is-centered">
 								<form action="" class="box">
-									<h1 class="is-size-2 pb-3">Sign Up</h1>
+									<h1 class="is-size-2 pb-3">Login</h1>
 
 									<div class="field">
 										<label for="" class="label">Email</label>
 										<div class="control has-icons-left">
-											<input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required />
-											<span class="icon is-small is-left">
-												<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-									</div>
-
-                                    <div class="field">
-										<label for="" class="label">Confirm Email</label>
-										<div class="control has-icons-left">
-											<input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required />
+											<input id="email" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required />
 											<span class="icon is-small is-left">
 												<i class="fa fa-envelope"></i>
 											</span>
@@ -80,16 +76,7 @@
 									<div class="field">
 										<label for="" class="label">Password</label>
 										<div class="control has-icons-left">
-											<input type="password" placeholder="*******" class="input " required />
-											<span class="icon is-small is-left">
-												<i class="fa fa-lock"></i>
-											</span>
-										</div>
-									</div>
-                                    <div class="field">
-										<label for="" class="label">Confirm Password</label>
-										<div class="control has-icons-left">
-											<input type="password" placeholder="*******" class="input " required />
+											<input id="password" type="password" placeholder="*******" class="input " onchange="" required />
 											<span class="icon is-small is-left">
 												<i class="fa fa-lock"></i>
 											</span>
@@ -97,10 +84,10 @@
 									</div>
 
 									<div class="buttons is-centered my-1">
-                                        <button class="button is-primary is-centered is-fullwidth is-rounded is-info">Sign Up</button>
+                                        <button class="button is-primary is-centered is-fullwidth is-rounded" onclick="CheckEmail(); window.location.href='/src/home/home.html';">Login</button>
 
                                     </div>
-                                    <div class="is-size-7-desktop is-size-6-mobile has-text-centered ">Already have an account? Login <a href="/auth/loginForm">here</a>.</div>
+                                    <div class="is-size-7-desktop is-size-6-mobile has-text-centered ">Need an account? Sign up <a href="/auth/signupForm">here</a>.</div>
 
 								</form>
 							</div>
@@ -109,6 +96,7 @@
 				</div>
 			</section>
 		</div>
+		<script src="login.js"></script>
 	</body>
 	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
 </html>
