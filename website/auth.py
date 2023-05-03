@@ -4,6 +4,7 @@ auth =Blueprint('auth',__name__)
 
 @auth.route("/")
 def home():
+    return redirect("/welcome", code=301)
     #if auth
     # redirect to /lobby/
     #else
@@ -12,5 +13,5 @@ def home():
 
 @auth.route("/welcome")
 def welcome():
-    #return welcome page
-    pass
+    return render_template("welcome.html")
+    
