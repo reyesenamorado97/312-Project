@@ -61,13 +61,13 @@
 					<div class="container">
 						<div class="columns is-centered">
 							<div class="column  is-4-desktop is-3-widescreen my-6 py-6 is-centered">
-								<form action="" class="box">
+								<form action="/auth/login" method="post" id="login-form" class="box">
 									<h1 class="is-size-2 pb-3">Login</h1>
 
 									<div class="field">
 										<label for="" class="label">Email</label>
 										<div class="control has-icons-left">
-											<input id="email" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required />
+											<input id="emailInput" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" onkeyup="CheckEmail();" required />
 											<span class="icon is-small is-left">
 												<i class="fa fa-envelope"></i>
 											</span>
@@ -96,7 +96,7 @@
 				</div>
 			</section>
 		</div>
-		<script src="login.js"></script>
+		<script src="/static/login.js"></script>
 	</body>
 	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
 </html>
