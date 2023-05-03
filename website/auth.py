@@ -5,7 +5,7 @@ auth =Blueprint('auth',__name__)
 @auth.route("/")
 def home():
     #if auth
-    # redirect to /lobby
+    # redirect to /lobby/
     #else
     # redirect to /welcome
     pass
