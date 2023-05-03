@@ -13,6 +13,23 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
+		<style>
+			.fadeIn {
+				animation: fadeInAnimation ease 1s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
+			
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+		</style>
+
 		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -38,7 +55,7 @@
 		<!-- Page Title -->
 
 		<!-- Landing Page Description -->
-		<div class="">
+		<div class="fadeIn">
 			<section class="hero ">
 				<div class>
 					<div class="container">
@@ -67,7 +84,7 @@
 									</div>
 
 									<div class="buttons is-centered my-1">
-                                        <button class="button is-primary is-centered is-fullwidth is-rounded" onclick="CheckEmail()" >Login</button>
+                                        <button class="button is-primary is-centered is-fullwidth is-rounded" onclick="CheckEmail(); window.location.href='/src/home/home.html';">Login</button>
 
                                     </div>
                                     <div class="is-size-7-desktop is-size-6-mobile has-text-centered ">Need an account? Sign up <a href="/src/signup/signup.html">here</a>.</div>
