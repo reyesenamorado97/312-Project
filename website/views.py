@@ -16,11 +16,11 @@ def welcome():
     return render_template("welcome.html")
 
 @views.route("/templates/<file>")
-def navbar(file):
+def templates(file):
     return send_from_directory('templates',file)
 
 @views.route("/static/<file>")
-def navbar(file):
+def static(file):
     return send_from_directory('static',file)
 
 @views.route("/images/<image>")
