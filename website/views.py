@@ -19,6 +19,10 @@ def welcome():
 def navbar(file):
     return send_from_directory('templates',file)
 
+@views.route("/static/<file>")
+def navbar(file):
+    return send_from_directory('static',file)
+
 @views.route("/images/<image>")
 def hero(image):
     return send_from_directory('images',image)
