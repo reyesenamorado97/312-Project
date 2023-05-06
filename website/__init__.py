@@ -1,5 +1,9 @@
 from flask import Flask
 
+#--- Database object intialized
+from db import Databse_Handler
+database=Databse_Handler()
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY']='hsfjdsfjnoaolnsuveueoop'
