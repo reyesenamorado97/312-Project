@@ -1,14 +1,23 @@
 from flask import Blueprint, render_template, send_from_directory, redirect
+import sys
+from flask import current_app as app
+from pymongo import MongoClient
+
+#--- Importing the database object from __init__ (website project)
+from website import database
+
+
 
 views =Blueprint('views',__name__)
+@views.route("/testdb")
+def testdb():
+    database.testdb()
+    return "Hello"
 
 @views.route("/")
 def home():
+    print("hi")
     return redirect("/welcome", code=301)
-    #if auth
-    # redirect to /lobby/
-    #else
-    # redirect to /welcome
     pass
 
 @views.route("/welcome")
