@@ -64,11 +64,13 @@
               <div class="column is-4-desktop is-3-widescreen my-6 py-6 is-centered">
                 <form action="/login" method="post" id="login-form" class="box">
                   <h1 class="is-size-2 pb-3">Login</h1>
+                  <h6 class="is-size-6 pb-2 has-text-danger">{{error}}</h6>
+
 
                   <div class="field">
                     <label for="" class="label">Email</label>
                     <div class="control has-icons-left">
-                      <input id="emailInput" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" onkeyup="CheckEmail();" required />
+                      <input name="email" id="emailInput" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" onkeyup="CheckEmail();" required />
                       <span class="icon is-small is-left">
                         <i class="fa fa-envelope"></i>
                       </span>
@@ -77,7 +79,7 @@
                   <div class="field">
                     <label for="" class="label">Password</label>
                     <div class="control has-icons-left">
-                      <input id="password" type="password" placeholder="*******" class="input" onchange="" required />
+                      <input name="password" id="password" type="password" placeholder="*******" class="input" onchange="" required />
                       <span class="icon is-small is-left">
                         <i class="fa fa-lock"></i>
                       </span>
@@ -85,9 +87,9 @@
                   </div>
 
                   <div class="buttons is-centered my-1">
-                    <button class="button is-primary is-centered is-fullwidth is-rounded" onclick="CheckEmail(); window.location.href='/src/home/home.html';">Login</button>
+                    <input type="submit" class="button is-primary is-centered is-fullwidth is-rounded is-primary">Login</input>
                   </div>
-                  <div class="is-size-7-desktop is-size-6-mobile has-text-centered">Need an account? Sign up <a href="/login">here</a>.</div>
+                  <div class="is-size-7-desktop is-size-6-mobile has-text-centered">Need an account? Sign up <a href="/signupForm">here</a>.</div>
                 </form>
               </div>
             </div>

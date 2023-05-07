@@ -1,2 +1,4 @@
 flask
 Flask-PyMongo
+pymongo
+bcrypt
