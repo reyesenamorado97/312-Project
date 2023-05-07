@@ -57,6 +57,21 @@
 				/* background-color:#CCC; */
 			}
 
+			.card-color:hover {
+				background-color: yellow;
+				cursor: hand;
+			}
+			.card-color.pointer {
+				cursor: grab;
+			}
+
+			.grow {
+				transition: all 0.2s ease-in-out;
+			}
+			.grow:hover {
+				transform: scale(1.02);
+			}
+
 			.table-size {
 				margin-left: auto;
 				margin-right: auto;
@@ -81,7 +96,7 @@
 		<div id="navbarContent"></div>
 		<h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">Home</h1>
 
-		<!-- Landing Page Description -->
+		<!-- Home Page Content -->
 		<div class="section pt-1 mx-1 fadeIn">
 			<div class="container">
 				<div class="columns is-vcentered">
@@ -102,11 +117,11 @@
 
 						<div class="lobbies-scrollable">
 							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color">
+							<div class="card card-size card-color grow" onclick="window.location.href='/game/lobby';">
 								<div class="card-content">
 									<div class="media">
 										<div class="media-content">
-											<p class="title is-4">Placeholder Name</p>
+											<p class="title is-4">Placeholder Name 1</p>
 										</div>
 									</div>
 									<div class="content">
@@ -117,11 +132,11 @@
 							<br />
 
 							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color">
+							<div class="card card-size card-color grow" onclick="window.location.href='/game/lobby';">
 								<div class="card-content">
 									<div class="media">
 										<div class="media-content">
-											<p class="title is-4">Placeholder Name</p>
+											<p class="title is-4">Placeholder Name 2</p>
 										</div>
 									</div>
 									<div class="content">
@@ -132,11 +147,11 @@
 							<br />
 
 							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color">
+							<div class="card card-size card-color grow" onclick="window.location.href='/game/lobby';">
 								<div class="card-content">
 									<div class="media">
 										<div class="media-content">
-											<p class="title is-4">Placeholder Name</p>
+											<p class="title is-4">Placeholder Name 3</p>
 										</div>
 									</div>
 									<div class="content">
