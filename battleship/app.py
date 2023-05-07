@@ -65,7 +65,6 @@ def register():
         
         test = "Username Already in Use"
         return render_template("signup.html", error = test)
-        
     return redirect("/signupForm",code=301)
 
 
@@ -82,13 +81,17 @@ def login():
         username = html.escape(username)
         logged = database.authenticate(username = username, password = password)
         if logged:
-            return redirect("/home")
+            redirect_response = redirect("/home")
+            redirect_response.set_cookie("authToken", "random_cookie_value")
+            return redirect_response
     test = "Incorrect Credentials"
     return render_template("login.html", error = test)
 
 
 @app.route("/home")
 def home():
+    auth_token = request.cookies.get('authToken')
+    print(auth_token)
     return render_template("home.html")
 
 @app.route("/user")
