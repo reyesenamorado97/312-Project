@@ -2,7 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 from flask import Flask
 from flask_pymongo import PyMongo
 import html
-import time
+
 
 from database import Database_Handler
 
