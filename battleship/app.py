@@ -98,12 +98,3 @@ def user():
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0')
 
-# if __name__=="__main__":
-#     app = Flask(__name__)
-#     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
-#     mongo_client = PyMongo(app, uri="mongodb://localhost:27017/todo_db")
-#     db = mongo_client.db
-
-#     user_collection = db['users']
-#     leaderboard_collection = db['leaderboard']
