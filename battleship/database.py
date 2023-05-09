@@ -30,12 +30,11 @@ class Database_Handler():
 
     def authenticate(self, username, password):
         # Find a user in the database
-        return self.users_collection.find_one({'username': username})
-        # user = self.users_collection.find_one({'username': username})
-        # if user != None:
-        #     return bcrypt.checkpw(password.encode(),user['password'])
-        # print("User does not exist.")
-        # return False
+        user = self.users_collection.find_one({'username': username})
+        if user:
+            return bcrypt.checkpw(password.encode(),user['password'])
+        print("User does not exist.")
+        return False
 
     def find_user(self, username):
         profile = self.users_collection.find_one(
