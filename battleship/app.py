@@ -98,6 +98,7 @@ def home():
 def user():
     return render_template("user.html")
 
+
 @app.route("/lobby")
 def lobby():
     return render_template("lobby.html")
@@ -105,6 +106,10 @@ def lobby():
 @app.route("/game")
 def game():
     return render_template("game.html")
+
+@app.route("/edit")
+def edit():
+    return render_template("edit.html")
 
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0')
