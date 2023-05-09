@@ -1,6 +1,7 @@
 from flask import Flask, render_template, send_from_directory, request, redirect
 from flask import Flask
 from flask_pymongo import PyMongo
+from flask_socketio import SocketIO
 import html
 
 
@@ -10,6 +11,8 @@ database=Database_Handler()
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+app.config['SECRET-KEY']="munch"
+socketio=SocketIO(app=app)
 
 # [User accounts]
 # Each user's profile must track at least one value related to that user (eg. display name, avatar, number of wins, etc.)
@@ -33,7 +36,7 @@ def templates(file):
 
 
 # @app.route("/static/<file>")
-# def static(file):
+# def statc(file):
 #     return send_from_directory('static', file)
 
 
@@ -96,5 +99,6 @@ def user():
     return render_template("user.html")
 
 if __name__=="__main__":
-    app.run(debug=True,host='0.0.0.0')
+    socketio.run(app,debug=True,host='0.0.0.0')
+    # app.run(debug=True,host='0.0.0.0')
 
