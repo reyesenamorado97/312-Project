@@ -1,236 +1,256 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Decide on the name in the tab here -->
-    <title>Home</title>
+		<!-- Decide on the name in the tab here -->
+		<title>Home</title>
 
-    <!-- This forces the app to use Bulma CSS for styles
+		<!-- This forces the app to use Bulma CSS for styles
 		        Class name is provided by Bulma, so if you're looking for a style, 
                 you should search for a a Bulma classname that has the style you're looking for -->
-    <!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <style>
-      .fadeIn {
-        animation: fadeInAnimation ease 1s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-      }
+		<style>
+			.fadeIn {
+				animation: fadeInAnimation ease 1s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
 
-      .test {
-        background-color: red;
-      }
+			.test {
+				background-color: red;
+			}
 
-      @keyframes fadeInAnimation {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
 
-      .leaderboard-padding {
-        padding-bottom: 15px;
-      }
+			.leaderboard-padding {
+				padding-bottom: 15px;
+			}
 
-      .lobbies-scrollable {
-        border: 3px solid #4a4a4a;
-        border-radius: 0.25rem;
-        height: 440px;
-        width: 100%;
-        /* background-color:#CCC; */
-        overflow-y: auto;
-      }
-      .card-size {
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10;
-        width: 96%;
-        /* background-color:#CCC; */
-      }
-      .card-color {
-        background: #a13ed047;
-        /* background-color:#CCC; */
-      }
+			.lobbies-scrollable {
+				border: 3px solid #4a4a4a;
+				border-radius: 0.25rem;
+				height: 440px;
+				width: 100%;
+				/* background-color:#CCC; */
+				overflow-y: auto;
+			}
+			.card-size {
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 10;
+				width: 96%;
+				/* background-color:#CCC; */
+			}
+			.card-color {
+				background: #a13ed047;
+				/* background-color:#CCC; */
+			}
 
-      .table-size {
-        margin-left: auto;
-        margin-right: auto;
-        width: 90%;
-      }
-    </style>
+			.card-color:hover {
+				background-color: yellow;
+				cursor: hand;
+			}
+			.card-color.pointer {
+				cursor: grab;
+			}
 
-    <!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+			.grow {
+				transition: all 0.2s ease-in-out;
+			}
+			.grow:hover {
+				transform: scale(1.02);
+			}
 
-    <!-- Grab the navbar content from /src/navbar/navbar.html -->
-    <script>
-      $(function () {
-        $("#navbarContent").load("/templates/navbar.html");
-      });
-    </script>
-  </head>
+			.table-size {
+				margin-left: auto;
+				margin-right: auto;
+				width: 90%;
+			}
+		</style>
 
-  <!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
-  <body>
-    <!-- NavBar -->
-    <div id="navbarContent"></div>
-    <h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">Home</h1>
+		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-    <!-- Landing Page Description -->
-    <div class="section pt-1 mx-1 fadeIn">
-      <div class="container">
-        <div class="columns is-vcentered">
-          <!-- Lobbies Column -->
-          <div class="section column is-7 is-size-5-desktop is-size-6-mobile">
-            <!-- Row for column title and button -->
-            <div class="level">
-              <h2 class="is-size-2-desktop is-size-3-mobile">Open Lobbies</h2>
-              <div class="">
-                <button class="button is-medium is-info is-rounded create-button" onclick="window.location.href='/src/signup/signup.html';">Create a Lobby</button>
-              </div>
-            </div>
+		<!-- Grab the navbar content from /src/navbar/navbar.html -->
+		<script>
+			$(function () {
+				$("#navbarContent").load("/templates/navbar.html");
+			});
+		</script>
+	</head>
 
-            <div class="lobbies-scrollable">
-              <!-- Card for an Open Lobby -->
-              <div class="card card-size card-color">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">Placeholder Name</p>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-              <br />
+	<!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+	<body>
+		<!-- NavBar -->
+		<div id="navbarContent"></div>
+		<h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">Home</h1>
 
-              <!-- Card for an Open Lobby -->
-              <div class="card card-size card-color">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">Placeholder Name</p>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-              <br />
+		<!-- Home Page Content -->
+		<div class="section pt-1 mx-1 fadeIn">
+			<div class="container">
+				<div class="columns is-vcentered">
+					<!-- Lobbies Column -->
+					<div class="section column is-7 is-size-5-desktop is-size-6-mobile">
+						<!-- Row for column title and button -->
+						<div class="level">
+							<h2 class="is-size-2-desktop is-size-3-mobile">Open Lobbies</h2>
+							<div class="">
+								<button
+									class="button is-medium is-info is-rounded create-button"
+									onclick="window.location.href='/lobby';"
+								>
+									Create a Lobby
+								</button>
+							</div>
+						</div>
 
-              <!-- Card for an Open Lobby -->
-              <div class="card card-size card-color">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">Placeholder Name</p>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-              <br />
-            </div>
-            <!-- End of scrollable content -->
-          </div>
-          <!-- End of Lobbies Column -->
+						<div class="lobbies-scrollable">
+							<!-- Card for an Open Lobby -->
+							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">Placeholder Name 1</p>
+										</div>
+									</div>
+									<div class="content">
+										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+									</div>
+								</div>
+							</div>
+							<br />
 
-          <!-- Column for leaderboard -->
-          <div class="section column is-5 is-size-5-desktop is-size-6-mobile">
-            <div>
-              <h1 class="is-size-2-desktop is-size-3-mobile leaderboard-padding">Leaderboard</h1>
-              <hr />
-            </div>
+							<!-- Card for an Open Lobby -->
+							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">Placeholder Name 2</p>
+										</div>
+									</div>
+									<div class="content">
+										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+									</div>
+								</div>
+							</div>
+							<br />
 
-            <!-- Start of Table -->
-            <table class="table table-size">
-              <!-- Header Content -->
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Username</th>
-                  <th>Wins</th>
-                </tr>
-              </thead>
+							<!-- Card for an Open Lobby -->
+							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">Placeholder Name 3</p>
+										</div>
+									</div>
+									<div class="content">
+										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+									</div>
+								</div>
+							</div>
+							<br />
+						</div>
+						<!-- End of scrollable content -->
+					</div>
+					<!-- End of Lobbies Column -->
 
-              <!-- Table Data Goes Here -->
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>user1</td>
-                  <td>999</td>
-                </tr>
+					<!-- Column for leaderboard -->
+					<div class="section column is-5 is-size-5-desktop is-size-6-mobile">
+						<div>
+							<h1 class="is-size-2-desktop is-size-3-mobile leaderboard-padding">Leaderboard</h1>
+							<hr />
+						</div>
 
-                <tr>
-                  <td>2</td>
-                  <td>user23</td>
-                  <td>150</td>
-                </tr>
+						<!-- Start of Table -->
+						<table class="table table-size">
+							<!-- Header Content -->
+							<thead>
+								<tr>
+									<th>Rank</th>
+									<th>Username</th>
+									<th>Wins</th>
+								</tr>
+							</thead>
 
-                <tr>
-                  <td>3</td>
-                  <td>user100</td>
-                  <td>100</td>
-                </tr>
+							<!-- Table Data Goes Here -->
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>user1</td>
+									<td>999</td>
+								</tr>
 
-                <tr>
-                  <td>4</td>
-                  <td>user99</td>
-                  <td>99</td>
-                </tr>
+								<tr>
+									<td>2</td>
+									<td>user23</td>
+									<td>150</td>
+								</tr>
 
-                <tr>
-                  <td>5</td>
-                  <td>user00</td>
-                  <td>51</td>
-                </tr>
+								<tr>
+									<td>3</td>
+									<td>user100</td>
+									<td>100</td>
+								</tr>
 
-                <tr>
-                  <td>6</td>
-                  <td>helloworld</td>
-                  <td>50</td>
-                </tr>
+								<tr>
+									<td>4</td>
+									<td>user99</td>
+									<td>99</td>
+								</tr>
 
-                <tr>
-                  <td>7</td>
-                  <td>munchGod</td>
-                  <td>40</td>
-                </tr>
+								<tr>
+									<td>5</td>
+									<td>user00</td>
+									<td>51</td>
+								</tr>
 
-                <tr>
-                  <td>8</td>
-                  <td>goodbyeWorld</td>
-                  <td>16</td>
-                </tr>
+								<tr>
+									<td>6</td>
+									<td>helloworld</td>
+									<td>50</td>
+								</tr>
 
-                <tr>
-                  <td>9</td>
-                  <td>codeMunchie</td>
-                  <td>10</td>
-                </tr>
+								<tr>
+									<td>7</td>
+									<td>munchGod</td>
+									<td>40</td>
+								</tr>
 
-                <tr>
-                  <td>10</td>
-                  <td>creativeGuy</td>
-                  <td>9</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+								<tr>
+									<td>8</td>
+									<td>goodbyeWorld</td>
+									<td>16</td>
+								</tr>
 
-  <!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+								<tr>
+									<td>9</td>
+									<td>codeMunchie</td>
+									<td>10</td>
+								</tr>
+
+								<tr>
+									<td>10</td>
+									<td>creativeGuy</td>
+									<td>9</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
 </html>
