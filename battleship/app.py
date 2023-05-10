@@ -1,7 +1,9 @@
 from flask import Flask, render_template, send_from_directory, request, redirect
 from flask import Flask
 from flask_pymongo import PyMongo
+from flask_socketio import SocketIO, emit
 import html
+import json
 
 
 from database import Database_Handler
@@ -10,6 +12,9 @@ database=Database_Handler()
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+app.config['SECRET-KEY']="munch"
+socketio=SocketIO(app=app)
+
 
 # [User accounts]
 # Each user's profile must track at least one value related to that user (eg. display name, avatar, number of wins, etc.)
@@ -110,6 +115,25 @@ def lobby():
 def game():
     return render_template("game.html")
 
+
+### Websocket Stuff ###
+@socketio.on('connect')
+def connect():
+    test=json.dumps({"youAre":"Unknown"})
+    emit('user',test,broadcast=True)
+    pass
+
+@socketio.on('disconnect')
+def disconnect():
+    print('disconnected')
+    pass
+
+@socketio.on('message')
+def socket_message():
+    pass
+
+
 if __name__=="__main__":
-    app.run(debug=True,host='0.0.0.0')
+    socketio.run(app,debug=True,host='0.0.0.0')
+    
 
