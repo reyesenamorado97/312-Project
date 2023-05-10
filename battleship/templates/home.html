@@ -117,49 +117,7 @@
 
 						<div class="lobbies-scrollable">
 							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
-								<div class="card-content">
-									<div class="media">
-										<div class="media-content">
-											<p class="title is-4">Placeholder Name 1</p>
-										</div>
-									</div>
-									<div class="content">
-										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-									</div>
-								</div>
-							</div>
-							<br />
-
-							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
-								<div class="card-content">
-									<div class="media">
-										<div class="media-content">
-											<p class="title is-4">Placeholder Name 2</p>
-										</div>
-									</div>
-									<div class="content">
-										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-									</div>
-								</div>
-							</div>
-							<br />
-
-							<!-- Card for an Open Lobby -->
-							<div class="card card-size card-color grow" onclick="window.location.href='/game';">
-								<div class="card-content">
-									<div class="media">
-										<div class="media-content">
-											<p class="title is-4">Placeholder Name 3</p>
-										</div>
-									</div>
-									<div class="content">
-										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-									</div>
-								</div>
-							</div>
-							<br />
+							<div id="allCards"></div>
 						</div>
 						<!-- End of scrollable content -->
 					</div>
@@ -184,72 +142,16 @@
 							</thead>
 
 							<!-- Table Data Goes Here -->
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>user1</td>
-									<td>999</td>
-								</tr>
-
-								<tr>
-									<td>2</td>
-									<td>user23</td>
-									<td>150</td>
-								</tr>
-
-								<tr>
-									<td>3</td>
-									<td>user100</td>
-									<td>100</td>
-								</tr>
-
-								<tr>
-									<td>4</td>
-									<td>user99</td>
-									<td>99</td>
-								</tr>
-
-								<tr>
-									<td>5</td>
-									<td>user00</td>
-									<td>51</td>
-								</tr>
-
-								<tr>
-									<td>6</td>
-									<td>helloworld</td>
-									<td>50</td>
-								</tr>
-
-								<tr>
-									<td>7</td>
-									<td>munchGod</td>
-									<td>40</td>
-								</tr>
-
-								<tr>
-									<td>8</td>
-									<td>goodbyeWorld</td>
-									<td>16</td>
-								</tr>
-
-								<tr>
-									<td>9</td>
-									<td>codeMunchie</td>
-									<td>10</td>
-								</tr>
-
-								<tr>
-									<td>10</td>
-									<td>creativeGuy</td>
-									<td>9</td>
-								</tr>
+							<tbody id="tableData">
+								
+								
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+		<script src="/static/home.js"></script>
 	</body>
 
 	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>

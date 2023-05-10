@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, request, redirect
+from flask import Flask, render_template, send_from_directory, request, redirect, jsonify
 from flask import Flask
 from flask_pymongo import PyMongo
 from flask_socketio import SocketIO, emit
@@ -106,6 +106,17 @@ def user():
 @app.route("/edit")
 def edit():
     return render_template("edit.html")
+
+@app.route("/currentGames")
+def send_rooms():
+    rooms={"rooms":[1,2,3,4,5]}
+    return jsonify(rooms)
+
+@app.route("/leaderboard")
+def send_leaderboard():
+    leaderboardData={'leaderboard':[('munch',85),('Adavita',65), ('munchGod',40),('Ethanial',65)]}
+    
+    return jsonify(leaderboardData)
 
 @app.route("/lobby")
 def lobby():

@@ -1,4 +1,5 @@
-var socket=io.connect('http://localhost:5000');
+let room
+var socket = io.connect('http://localhost:5000');
 
 socket.on('connect', function(){
     console.log("connected to web sockets")
@@ -8,11 +9,33 @@ socket.on('disconnect', function(){
     console.log("disconnected to web sockets")
 });
 
-socket.on('user', function(message){
+socket.on('user', function (message) {
     console.log('Hi')
     console.log(message)
 });
 
+// Runs when server responds 
+socket.on('gameResponse', function (message) {
+    
+    if (message == "button4") {
+        missText.innerHTML = "You Won!";
+        winGame();
+        window.location.replace("/home");
+        return
+    }
+
+    // Reenable all the buttons that have not been pressed yet 
+    buttonsMap.forEach((value, key) => {
+        
+        
+        if (!pressedButtons.includes(key)) {
+			value.disabled = false;
+		}
+    });
+    
+    missText.innerHTML = "You missed their ship!";
+    
+});
 
 // Get buttons from html
 const button1 = document.getElementById("button1");
@@ -34,25 +57,6 @@ const button16 = document.getElementById("button16");
 
 
 const missText = document.getElementById("miss");
-
-// allButtons = [
-// 	button1,
-// 	button2,
-// 	button3,
-// 	button4,
-// 	button5,
-// 	button6,
-// 	button7,
-// 	button8,
-// 	button9,
-// 	button10,
-// 	button11,
-// 	button12,
-// 	button13,
-// 	button14,
-// 	button15,
-// 	button16,
-// ];
 
 const buttonsMap = new Map();
 buttonsMap.set("button1", button1);
@@ -90,38 +94,14 @@ function winGame() {
 
 // Runs whenever a game button is pressed
 async function pressAnyGameButton(buttonId) {
-
+    console.log(buttonId)
     missText.innerHTML = "Waiting...";
     // Add the id of this button to the list of pressed buttons
     pressedButtons.push(buttonId)
 
     disableAllGameButtons()
 
-    // Simulate waiting for an opponent to press a button
-    // Server stuff should happen
-    await new Promise(r => setTimeout(r, 2000));
-
-    if (buttonId == "button4") {
-        missText.innerHTML = "You Won!";
-        await new Promise(r => setTimeout(r, 10));
-        winGame();
-        window.location.replace("/home");
-
-
-        return
-
-    }
-
-    // Reenable all the buttons that have not been pressed yet 
-    buttonsMap.forEach((value, key) => {
-        
-        
-        if (!pressedButtons.includes(key)) {
-			value.disabled = false;
-		}
-    });
-    
-    missText.innerHTML = "You missed their ship!";
+    socket.emit(buttonId, { 'button': buttonId , 'room': room})
 }
 
 // need ajax for  for
