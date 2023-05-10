@@ -1,0 +1,33 @@
+Flask - Parsing HTTP Headers
+
+Code Repository: 
+https://github.com/pallets/flask
+
+License Type:
+BSD 3-Clause License
+
+License Description:
+This license is similar to the BSD 2-Clause License which contains two clauses. The first clause is that redistribution of 
+the source code must contain a specific copyright notice, a list of conditions and a specific disclaimer. The second clause 
+requires that redistribution that is in binary form must include the same three items mentioned above in the documentation. 
+There is a third clause that comes in with the BSD 3-Clause License which the framework Flask is under. This clause is that 
+neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products 
+derived from this software without specific prior written permission.
+
+The permissions that are allowed with Flask under this license are that it is approved for commercial and/or private use, 
+and is able to be modified and/or distributed. There are limitations with liability and warranty. Essentially, the 
+requirements of this license when copying, modifying or distributing any code is that the full text of the license must be
+included, along with the original copyright notice (which is actually included in the license). The license must include
+the year and owner in the form "Copyright (c) $YEAR $OWNER, All rights reserved".
+
+License Restrictions:
+The BSD 3-Clause License has very minimal restrictions, which is what makes it easier to use and understand since it can be
+fairly used commercially and privately. A restriction that is does include concerns using the names of contributors to the
+repository for endorsement when advertising without permission. This is the third clause that was mentioned above, where 
+people using code under the BSD 3-Clause license are unable to include the name of the copyright holder and/or the 
+contributors to endorse any work that was produced from using the open source code under this license. For example, a project
+created from using Flask cannot be endorsed by the contributors of Flask without special permission.
+
+Dispel Magic:
+
+1. 
