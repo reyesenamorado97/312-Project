@@ -1,8 +1,9 @@
 from flask import Flask, render_template, send_from_directory, request, redirect
 from flask import Flask
 from flask_pymongo import PyMongo
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 import html
+import json
 
 
 from database import Database_Handler
@@ -97,6 +98,24 @@ def home():
 @app.route("/user")
 def user():
     return render_template("user.html")
+### game
+
+### Websocket Stuff ###
+@socketio.on('connect')
+def connect():
+    test=json.dumps({"youAre":"Unknown"})
+    emit('user',test,broadcast=True)
+    pass
+
+@socketio.on('disconnect')
+def disconnect():
+    print('disconnected')
+    pass
+
+@socketio.on('message')
+def socket_message():
+    pass
+
 
 if __name__=="__main__":
     socketio.run(app,debug=True,host='0.0.0.0')
