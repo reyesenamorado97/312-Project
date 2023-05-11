@@ -1,12 +1,15 @@
 from flask import Flask, render_template, send_from_directory, request, redirect, jsonify
 from flask import Flask
 from flask_pymongo import PyMongo
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room, send
 import html
 import json
+import random
 
 
 from database import Database_Handler
+
+game_rooms={}
 
 database=Database_Handler()
 
@@ -109,29 +112,58 @@ def edit():
 
 @app.route("/currentGames")
 def send_rooms():
-    rooms={"rooms":[1,2,3,4,5]}
+    rooms={"rooms":list(game_rooms.keys())}
     return jsonify(rooms)
 
 @app.route("/leaderboard")
 def send_leaderboard():
     leaderboardData={'leaderboard':[('munch',85),('Adavita',65), ('munchGod',40),('Ethanial',65)]}
-    
     return jsonify(leaderboardData)
+
 
 @app.route("/lobby")
 def lobby():
+    user=random.randint(0,1000)
+    win_button=random.randint(1,16)
+    game_rooms[0]=[[user],[win_button]]
     return render_template("lobby.html")
 
 @app.route("/game")
 def game():
     return render_template("game.html")
+### game
+# user_num=0
+# room_num=0
+# game_rooms={1:[[],[]],2:[[],[]]}
+# @app.route("/lobby")
+# def lobby(data):
+#     #game_rooms
+#     data=json.loads(data)
+
+
+#     win_button=random.randint(1,16)
+#     game_rooms[room_num]=[[user_num],[win_button]]
+
+#     return render_template("lobby.html")
+
 
 
 ### Websocket Stuff ###
 @socketio.on('connect')
 def connect():
-    test=json.dumps({"youAre":"Unknown"})
-    emit('user',test,broadcast=True)
+    if 'room0' not in game_rooms:
+        win_button=random.randint(1,16)
+        game_rooms['room0']=[[request.sid],[win_button]]
+        join_room('room0')
+        
+    else:
+        win_button=random.randint(1,16)
+        game_rooms['room0'][0].append(request.sid)
+        game_rooms['room0'][1].append(win_button)
+        join_room('room0')
+
+    test=json.dumps({"room":"room0",'youAre':request.sid})
+    emit('room',test,to=request.sid)
     pass
 
 @socketio.on('disconnect')
@@ -139,12 +171,46 @@ def disconnect():
     print('disconnected')
     pass
 
-@socketio.on('message')
-def socket_message():
+@socketio.on('button')
+def socket_message(data):
+    button=int(data['button'].split('n')[1])
+    room=data['room']
+    info=game_rooms[room]
+    ans={'user':data['user'],'winner':'None'}
+    # ans2={'user':info[0][1],'won':False,'lost':False}
+    
+    
+    print(info)
+    # print(data['user'])
+    # emit('gameResponse',ans1,to=room)
+
+    if data['user']==info[0][0]:
+        if button==info[1][1]:
+            ans['winner']=info[0][0]
+        emit('gameResponse',ans,to=room)
+        # else:
+        #     emit('gameResponse',ans,to=room)
+    else:
+        if button==info[1][0]:
+            ans['winner']=info[0][1]
+        emit('gameResponse',ans,to=room)
+        #     ans2['won']=True
+        #     ans1=json.dumps(ans1)
+        #     ans2=json.dumps(ans2)
+        #     emit('gameResponse',ans1,to=room)
+        #     emit('gameResponse',ans2,to=room)
+        # else:
+        #     emit('gameResponse',ans1,to=room)
+    
+    # ans1=json.dumps(ans1)
+    # ans2=json.dumps(ans2)
+    # emit('gameResponse',ans1,to=info[0][0])
+    # emit('gameResponse',ans2,to=info[0][1])
+
     pass
 
 
 if __name__=="__main__":
-    socketio.run(app,debug=True,host='0.0.0.0')
+    socketio.run(app,debug=True,host='0.0.0.0',port=8000)
     
 
