@@ -1,0 +1,104 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Decide on the name in the tab here -->
+    <title>Login</title>
+
+    <!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+    <!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+      .fadeIn {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeInAnimation {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- Grab the navbar content from /src/navbar/navbar.html -->
+    <script>
+      $(function () {
+        $("#navbarContent").load("/templates/navbar.html");
+      });
+    </script>
+  </head>
+
+  <!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+  <body>
+    <!-- NavBar -->
+    <div id="navbarContent"></div>
+
+    <!-- Page Title -->
+
+    <!-- Landing Page Description -->
+    <div class="fadeIn">
+      <section class="hero">
+        <div class>
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-4-desktop is-3-widescreen my-6 py-6 is-centered">
+                <form action="/edit" method="post" id="edit-form" class="box">
+                  <h1 class="is-size-2 pb-3">Update Password</h1>
+                  <h6 class="is-size-6 pb-2 has-text-danger">{{error}}</h6>
+
+                  <div class="field">
+                    <label for="" class="label">Current Password</label>
+                    <div class="control has-icons-left">
+                      <input name="password" type="password" placeholder="*******" class="input" required />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label for="" class="label">New Password</label>
+                    <div class="control has-icons-left">
+                      <input name="password" type="password" placeholder="*******" class="input" required />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label for="" class="label">Confirm Password</label>
+                    <div class="control has-icons-left">
+                      <input name="password" type="password" placeholder="*******" class="input" required />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="buttons is-centered my-1">
+                    <input type="submit" class="button is-primary is-centered is-fullwidth is-rounded is-info"></input>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+  <!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>

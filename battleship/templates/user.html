@@ -1,0 +1,91 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Decide on the name in the tab here -->
+    <title>Battleship Game</title>
+
+    <!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+    <!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet2" href="/src/index/index.css" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <style>
+      .fadeIn {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeInAnimation {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .center-svg {
+        display: flex;
+        justify-content: center;
+      }
+
+      .how-to-play-text {
+      }
+      .dot {
+        height: 200px;
+        width: 200px;
+        background-color: #ffc0cb;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    </style>
+
+    <!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- Grab the navbar content from /src/navbar/navbar.html -->
+    <script>
+      $(function () {
+        $("#navbarContent").load("/templates/navbar.html");
+      });
+    </script>
+  </head>
+
+  <!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+  <body class="has-text-centered">
+    <!-- NavBar -->
+    <div id="navbarContent"></div>
+
+    <!-- Main Page Header -->
+    <h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">My Account</h1>
+    <!-- How to Play Content -->
+    <div class="pt-1 pb-0 mx-5 fadeIn">
+      <div class="container">
+        <div class="mx-7 is-5 is-centered">
+          <div style="text-align: center">
+            <span class="dot"></span>
+          </div>
+          <!-- How To Play Text -->
+          <br />
+          <p class="is-size-6-desktop is-size-6-mobile pb-3 fadeIn ml-4 mr-4">Username: {{display_name}}</p>
+
+          <p class="is-size-6-desktop is-size-6-mobile pb-3 fadeIn ml-4 mr-4">Number of Wins: {{total_wins}}</p>
+
+          <!-- Quit Button -->
+          <div class="buttons is-centered">
+            <div class="my-5">
+              <button class="button is-medium is-danger is-rounded" onclick="window.location.href='/edit';">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>
