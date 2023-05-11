@@ -1,16 +1,20 @@
 from flask import Flask, render_template, send_from_directory, request, redirect, jsonify
 from flask import Flask
 # from flask_pymongo import PyMongo
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import html
 import json
 import uuid
+import random
 from werkzeug.urls import url_parse
 
 from database import Database_Handler
-
 database = Database_Handler()
+
+future_users={}
+room_num=[0]
+game_rooms={}
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -22,12 +26,14 @@ login_manager.login_view = "login"
 
 
 class User(UserMixin):
+    #room=None
     def __init__(self, username, _id=None):
 
         self.username = username
         self.wins = database.find_user(self.username)["wins"]
         # self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
+        self.room=None
 
     def is_authenticated(self):
         return True
@@ -54,6 +60,8 @@ class User(UserMixin):
         )
         # also increments
         self.wins += 1
+    def changeroom(self,new_room):
+        self.room=new_room
 
 
 @login_manager.user_loader
@@ -196,7 +204,8 @@ def edit():
 @app.route("/currentGames")
 @login_required
 def send_rooms():
-    rooms = {"rooms": [1, 2, 3, 4, 5]}
+    rooms = {"rooms": list(game_rooms.keys())}
+    print(rooms)
     return jsonify(rooms)
 
 
@@ -211,33 +220,84 @@ def send_leaderboard():
 def lobby():
     return render_template("lobby.html")
 
-
+### game
 @ app.route("/game")
 @ login_required
 def game():
     return render_template("game.html")
 
+@app.route('/game/<room>')
+@ login_required
+def join_game(room):
+    # print('yes motherfluckers')
+    # print("room",room)
+    # print("current User",current_user)
+    # current_user.changeroom(room)
+    # print('update user room', current_user.room)
+
+    # print('username',current_user.username)
+    future_users[current_user.username]=room
+    return render_template("game.html")
+
 
 ### Websocket Stuff ###
-@ socketio.on('connect')
+@socketio.on('connect')
 # Feel free to remove login_required on any of the routes if it makes testing easier
-@ login_required
+@login_required
 def connect():
-    test = json.dumps({"youAre": "Unknown"})
-    emit('user', test, broadcast=True)
+    room=''
+    print("current user on sid",current_user)
+    print("user room",current_user.room)
+    print('username',current_user.username)
+    if current_user.username in future_users:
+        room=future_users[current_user.username]
+        del future_users[current_user.username]
+        win_button=random.randint(1,16)
+        game_rooms[room][0].append(request.sid)
+        game_rooms[room][1].append(win_button)
+        join_room(room)
+    else:
+        room='room'+str(room_num[0])
+        room_num[0]+=1
+        win_button=random.randint(1,16)
+        game_rooms[room]=[[request.sid],[win_button]]
+        join_room(room)
+
+
+    test=json.dumps({"room":room,'youAre':request.sid})
+    emit('room',test,to=request.sid)
     pass
 
 
-@ socketio.on('disconnect')
+@socketio.on('disconnect')
 def disconnect():
     print('disconnected')
     pass
 
 
-@ socketio.on('message')
-def socket_message():
+@socketio.on('button')
+def socket_message(data):
+    button=int(data['button'].split('n')[1])
+    room=data['room']
+    info=game_rooms[room]
+    ans={'user':data['user'],'winner':'None'}
+    
+    print(info)
+    # print(data['user'])
+    # emit('gameResponse',ans1,to=room)
+
+    if data['user']==info[0][0]:
+        if button==info[1][1]:
+            ans['winner']=info[0][0]
+            del game_rooms[room]
+        emit('gameResponse',ans,to=room)
+    else:
+        if button==info[1][0]:
+            ans['winner']=info[0][1]
+            del game_rooms[room]
+        emit('gameResponse',ans,to=room)
     pass
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, host='0.0.0.0')
+    socketio.run(app, debug=True, host='0.0.0.0',port=8000)

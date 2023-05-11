@@ -1,6 +1,11 @@
-let room
-var socket = io.connect('http://localhost:5000');
+let room;
+let youAre;
+var socket = io.connect('http://localhost:8000');
 
+socket.on('room', function(data){
+    room = JSON.parse(data).room;
+    youAre=JSON.parse(data).youAre;
+})
 socket.on('connect', function(){
     console.log("connected to web sockets")
 });
@@ -16,24 +21,33 @@ socket.on('user', function (message) {
 
 // Runs when server responds 
 socket.on('gameResponse', function (message) {
-    
-    if (message == "button4") {
+   // message=JSON.parse(message);
+    console.log(message)
+    if (message.user!=youAre){
+        console.log("hi") 
+        // Reenable all the buttons that have not been pressed yet 
+        buttonsMap.forEach((value, key) => {
+            
+            
+            if (!pressedButtons.includes(key)) {
+                value.disabled = false;
+            }
+        });
+        
+        missText.innerHTML = "You missed their ship!";
+    }
+    if (message.winner==youAre) {
         missText.innerHTML = "You Won!";
         winGame();
         window.location.replace("/home");
         return
+    }   
+    if (message.winner!='None'){
+        missText.innerHTML = "You Lost!";
+        loseGame()
+        window.location.replace("/home");
+        return
     }
-
-    // Reenable all the buttons that have not been pressed yet 
-    buttonsMap.forEach((value, key) => {
-        
-        
-        if (!pressedButtons.includes(key)) {
-			value.disabled = false;
-		}
-    });
-    
-    missText.innerHTML = "You missed their ship!";
     
 });
 
@@ -92,6 +106,10 @@ function winGame() {
     alert("You sunk their ship! You win!")
 }
 
+function loseGame() {
+    alert("You lost!")
+}
+
 // Runs whenever a game button is pressed
 async function pressAnyGameButton(buttonId) {
     console.log(buttonId)
@@ -100,8 +118,9 @@ async function pressAnyGameButton(buttonId) {
     pressedButtons.push(buttonId)
 
     disableAllGameButtons()
+    buttonsMap.delete(buttonId)
 
-    socket.emit(buttonId, { 'button': buttonId , 'room': room})
+    socket.emit('button', {'user':youAre, 'button': buttonId , 'room': room})
 }
 
 // need ajax for  for
