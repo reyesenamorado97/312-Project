@@ -94,5 +94,9 @@ opponent's ship first.
     The header of the message is created on line 282:
     https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L328
 
-    Since the message is given as a parameter to the function, it can be combined with the header and sent on line 331:
+    Since the message is given as a parameter to the function, it can be encoded and combined with the header and sent on 
+    line 331:
     https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#LL331C1-L332C1
+
+    This is very similar to the homework code because it receives payload data in a loop, waits until the finbit indicates 
+    that it is the last message that is being sent and encodes a response in bytes to send back to the client.
