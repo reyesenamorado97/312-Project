@@ -4,7 +4,7 @@ const leaderboardData = document.getElementById("tableData");
 
 function loadCard(room) {
 	addCard.innerHTML +=
-		'<div class="card card-size card-color grow" onclick="window.location.href=\'/game\';">' +
+		'<div class="card card-size card-color grow" onclick="window.location.href=\'/game/'+ room + '\';">' +
 		'<div class="card-content"> <div class="media">' +
 		'<div class="media-content">' +
 		'<p class="title is-4">' +

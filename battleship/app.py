@@ -1,6 +1,5 @@
 from flask import Flask, render_template, send_from_directory, request, redirect, jsonify
 from flask import Flask
-from flask_pymongo import PyMongo
 from flask_socketio import SocketIO, emit, join_room, leave_room, send
 import html
 import json
@@ -9,6 +8,8 @@ import random
 
 from database import Database_Handler
 
+future_users={}
+room_num=[0]
 game_rooms={}
 
 database=Database_Handler()
@@ -128,41 +129,38 @@ def lobby():
     game_rooms[0]=[[user],[win_button]]
     return render_template("lobby.html")
 
+###game
 @app.route("/game")
 def game():
     return render_template("game.html")
-### game
-# user_num=0
-# room_num=0
-# game_rooms={1:[[],[]],2:[[],[]]}
-# @app.route("/lobby")
-# def lobby(data):
-#     #game_rooms
-#     data=json.loads(data)
 
-
-#     win_button=random.randint(1,16)
-#     game_rooms[room_num]=[[user_num],[win_button]]
-
-#     return render_template("lobby.html")
-
+@app.route('/game/<room>')
+def join_game(room):
+    print('yes motherfluckers')
+    future_users[request.sid]=room
+    return render_template("game.html")
 
 
 ### Websocket Stuff ###
 @socketio.on('connect')
 def connect():
-    if 'room0' not in game_rooms:
+    room=''
+    if request.sid in future_users:
+        room=future_users[request.sid]
+        del future_users[request.sid]
         win_button=random.randint(1,16)
-        game_rooms['room0']=[[request.sid],[win_button]]
-        join_room('room0')
-        
+        game_rooms[room][0].append(request.sid)
+        game_rooms[room][1].append(win_button)
+        join_room(room)
     else:
+        room='room'+str(room_num[0])
+        room_num[0]+=1
         win_button=random.randint(1,16)
-        game_rooms['room0'][0].append(request.sid)
-        game_rooms['room0'][1].append(win_button)
-        join_room('room0')
+        game_rooms[room]=[[request.sid],[win_button]]
+        join_room(room)
+    
 
-    test=json.dumps({"room":"room0",'youAre':request.sid})
+    test=json.dumps({"room":room,'youAre':request.sid})
     emit('room',test,to=request.sid)
     pass
 
@@ -177,7 +175,6 @@ def socket_message(data):
     room=data['room']
     info=game_rooms[room]
     ans={'user':data['user'],'winner':'None'}
-    # ans2={'user':info[0][1],'won':False,'lost':False}
     
     
     print(info)
@@ -187,25 +184,13 @@ def socket_message(data):
     if data['user']==info[0][0]:
         if button==info[1][1]:
             ans['winner']=info[0][0]
+            del game_rooms[room]
         emit('gameResponse',ans,to=room)
-        # else:
-        #     emit('gameResponse',ans,to=room)
     else:
         if button==info[1][0]:
             ans['winner']=info[0][1]
+            del game_rooms[room]
         emit('gameResponse',ans,to=room)
-        #     ans2['won']=True
-        #     ans1=json.dumps(ans1)
-        #     ans2=json.dumps(ans2)
-        #     emit('gameResponse',ans1,to=room)
-        #     emit('gameResponse',ans2,to=room)
-        # else:
-        #     emit('gameResponse',ans1,to=room)
-    
-    # ans1=json.dumps(ans1)
-    # ans2=json.dumps(ans2)
-    # emit('gameResponse',ans1,to=info[0][0])
-    # emit('gameResponse',ans2,to=info[0][1])
 
     pass
 
