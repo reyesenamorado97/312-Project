@@ -1,33 +1,46 @@
 Flask - WebSockets
 
 Code Repository: 
-https://github.com/pallets/flask
+
+There are three different types of libraries that we need to reference for our implementation of websockets in this project.
+    1. The first is Flask-SocketIO, which can be found here: https://github.com/miguelgrinberg/Flask-SocketIO
+    2. The second is gevent-websocket, which can be found here: https://github.com/jgelens/gevent-websocket
+    3. The last is socket.io, we can be found here: https://github.com/socketio/socket.io
 
 License Type:
-BSD 3-Clause License
+
+    1. The license type of Flask-SocketIO is MIT License
+    2. The license type of gevent-websock is Apache License Version 2.0
+    3. The license type of socket.io is MIT License
 
 License Description:
-This license is similar to the BSD 2-Clause License which contains two clauses. The first clause is that redistribution of 
-the source code must contain a specific copyright notice, a list of conditions and a specific disclaimer. The second clause 
-requires that redistribution that is in binary form must include the same three items mentioned above in the documentation. 
-There is a third clause that comes in with the BSD 3-Clause License which the framework Flask is under. This clause is that 
-neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products 
-derived from this software without specific prior written permission.
 
-The permissions that are allowed with Flask under this license are that it is approved for commercial and/or private use, 
-and is able to be modified and/or distributed. There are limitations with liability and warranty. Essentially, the 
-requirements of this license when copying, modifying or distributing any code is that the full text of the license must be
-included, along with the original copyright notice (which is actually included in the license). The license must include
-the year and owner in the form "Copyright (c) $YEAR $OWNER, All rights reserved".
+MIT License:
+This is known as one of the simplest open source license agreements. The MIT License will allow permission for users to 
+reuse code under this license for the use of any purpose, this is true in some cases where the code involved is included in 
+a portion of proprietary software. The requirement of programmer that may want to use and modify code under this license is 
+that they include the original copy of the MIT license in their description. A benefit of this license is that it can be 
+used by developers who intend to create programs for personal or propriety use, and that they are able to modify and 
+distribute as they wish. This is assuming that developers include the full copyright and license text.
+
+Apache 2.0 License:
+This license is very similar to the MIT License described above, since it allows developers to modify and distribute code 
+that is under the Apache 2.0 license for commercial and private use. Additionally, it allows for sublicensing, meaning that 
+it is possible to extend the license to the software. It includes the ability to place a warranty on the software that is 
+licensed and it can use patent claims of contributors to the code. To use code under this license, developers must include 
+the copyright statement and license text (which is also true in the case of the MIT License). Additionally, they must also include a notice file with attribution notes included and state any significant changes that were made to the software.
 
 License Restrictions:
-The BSD 3-Clause License has very minimal restrictions, which is what makes it easier to use and understand since it can be
-fairly used commercially and privately. A restriction that is does include concerns using the names of contributors to the
-repository for endorsement when advertising without permission. This is the third clause that was mentioned above, where 
-people using code under the BSD 3-Clause license are unable to include the name of the copyright holder and/or the 
-contributors to endorse any work that was produced from using the open source code under this license. For example, a project
-created from using Flask cannot be endorsed by the contributors of Flask without special permission.
+
+MIT License:
+A restriction that this license has is that it cannot hold the owner of the software/license liable for damages, which is a 
+good restriction to have. Generally, it is known that the MIT License is the least restrictive amongst the other licenses.
+
+Apache 2.0 License:
+Similarly to the MIT License, a restriction of this license is liability. Additionally, it is forbidden to use any of the contributors' names, trademarks or logos.
 
 Dispel Magic:
+
+****************don't forget to introooooooo****************
 
 1. 
