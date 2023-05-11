@@ -41,6 +41,58 @@ Similarly to the MIT License, a restriction of this license is liability. Additi
 
 Dispel Magic:
 
-****************don't forget to introooooooo****************
+It is necessary for our project to establish a websocket connection so that multiple players are able to create lobbies for 
+playing a game of battleship and join open lobbies to start playing. We are able to establish a websocket connection and 
+parse frames sent between the client and server by using several libraries that were mentioned above. The advantage that 
+this gives us is the ability to use real-time communication so we are able to determine which player was able to sink the 
+opponent's ship first.
 
-1. 
+1.  We can begin in our project code where we create a Flask-SocketIO server for the purpose of handling websocket          
+    connectopns through this line: socketio=SocketIO(app=app). This class is found on line 54 of the Flask_SocketIO     
+    repository's __init__.py file:
+    https://github.com/miguelgrinberg/Flask-SocketIO/blob/91b5ddc31bebeb6241d281252c711b160550ce01/src/flask_socketio/__init__.py#L54
+
+    In this SocketIO class, on line 695 the websocket is equal to True: websocket = True
+    https://github.com/miguelgrinberg/Flask-SocketIO/blob/91b5ddc31bebeb6241d281252c711b160550ce01/src/flask_socketio/__init__.py#L695
+
+    On line 700, there is a conditional which must occur since the websocket is now equal to True:
+    https://github.com/miguelgrinberg/Flask-SocketIO/blob/91b5ddc31bebeb6241d281252c711b160550ce01/src/flask_socketio/__init__.py#L700
+
+    Within this conditional, the WSGIServer is set: self.wsgi_server = pywsgi.WSGIServer((host, port), app, log=log, 
+    **kwargs).
+    https://github.com/miguelgrinberg/Flask-SocketIO/blob/91b5ddc31bebeb6241d281252c711b160550ce01/src/flask_socketio/__init__.py#LL701C25-L701C25
+
+    There is a function included, named run_server() which runs the server forever using serve_forever() on self.wsgi_server
+    https://github.com/miguelgrinberg/Flask-SocketIO/blob/91b5ddc31bebeb6241d281252c711b160550ce01/src/flask_socketio/__init__.py#L714
+
+2.  The gevent-websocket library comes in at this point, where it is used to parse the frame data received from the 
+    websocket frames. This can be found on line 190 of the gevent-websocket library's websocket.py file:
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L190
+
+    In line 209 of the same file, it reads the headers of the payload and gets the payload: payload = self.raw_read
+    (header.length)
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#LL209C26-L209C26
+
+    Once it knows the payload is the correct length after doing a check on line 216, it can begin to unmask it on line 220.
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L216
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L220
+
+    Now that it is unmasked, it can begin to read the message that was sent through the payload on line 233 using the 
+    function read_message()
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L233
+
+    This function calls the function read_frame() within a while True loop which resembles the way that reading websockets 
+    were implemented in the homework.
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L190
+
+    If the finbit indicates that it is not the last message, it will keep reading a new message from line 247:
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L247
+
+3.  To send a websocket frame, the send_frame() function in the gevent-websocket library's websocket.py file is used:
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L315
+
+    The header of the message is created on line 282:
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#L328
+
+    Since the message is given as a parameter to the function, it can be combined with the header and sent on line 331:
+    https://github.com/sinank/gevent-websocket/blob/5020669b0439fd49f054830c51b1aa1602b7d086/geventwebsocket/websocket.py#LL331C1-L332C1
