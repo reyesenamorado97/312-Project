@@ -1,7 +1,7 @@
 let room;
 let youAre;
 
-var socket = io.connect('http://localhost:5000');
+var socket = io.connect('http://localhost:8080');
 
 socket.on('room', function(data){
     data=JSON.parse(data)
