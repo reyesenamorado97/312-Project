@@ -146,7 +146,7 @@ def login():
         user = database.authenticate(
             username=username, password=password)
         print(user)
-        if user != None:
+        if user:
             # redirect_response = redirect("/home")
             # redirect_response.set_cookie("authToken", "random_cookie_value")
             # return redirect_response
@@ -264,6 +264,9 @@ def connect():
 
     test=json.dumps({"room":room,'youAre':user, "start":start})
     emit('room',test,to=request.sid)
+    if len(game_rooms[room][0])==2:
+        players=json.dumps({"p1":game_rooms[room][0][0],"p2":game_rooms[room][0][1]})
+        emit('players',players,to=room)
     pass
 
 
