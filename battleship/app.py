@@ -146,7 +146,7 @@ def login():
         user = database.authenticate(
             username=username, password=password)
         print(user)
-        if user != None:
+        if user:
             # redirect_response = redirect("/home")
             # redirect_response.set_cookie("authToken", "random_cookie_value")
             # return redirect_response
