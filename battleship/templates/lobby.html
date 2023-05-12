@@ -1,0 +1,108 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Decide on the name in the tab here -->
+		<title>Battleship Game</title>
+
+		<!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+		<!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+		<link rel="stylesheet2" href="/src/index/index.css" />
+		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+		<style>
+			.fadeIn {
+				animation: fadeInAnimation ease 1s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
+
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			.center-svg{
+				display: flex;
+				justify-content: center;
+			}
+
+			.how-to-play-text{
+				
+			}
+		</style>
+
+		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+		<!-- Grab the navbar content from /src/navbar/navbar.html -->
+		<script>
+			$(function () {
+				$("#navbarContent").load("/templates/navbar.html");
+			});
+		</script>
+	</head>
+
+	<!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+	<body class="has-text-centered ">
+		<!-- NavBar -->
+		<div id="navbarContent"></div>
+
+		<!-- Main Page Header -->
+		<h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">Waiting for an opponent...</h1>
+
+		<!-- Loading Icon -->
+		<div class="center-svg fadeIn" onclick="window.location.href='/game'">
+				<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+				<lottie-player
+				class="center-svg"
+					src="https://assets6.lottiefiles.com/packages/lf20_5nulgsrm.json"
+					background="rgba(0, 0, 0, 0)"
+					speed="3"
+					style="width: 300px; height: 300px"
+					loop
+					autoplay
+				></lottie-player>
+		</div>
+
+		<!-- How to Play Content -->
+		<div class="pt-1 pb-0 mx-5 fadeIn">
+			<div class="container">
+				<div class="mx-7 is-5 is-centered">
+					<h2 class="is-size-2-desktop is-size-3-mobile pb-3 fadeIn">How to Play:</h2>
+
+					<!-- How To Play Text -->
+					<p class="is-size-6-desktop is-size-6-mobile pb-3 fadeIn ml-4 mr-4">
+						Battleship is a game where two players compete to try to sink their opponent's ship first!
+						This game is a simplified version where the location of your ship and your opponent's ship
+						has already been chosen for you. It is represented by one coordinate in the four by four 
+						grid that appears on your screen. Go ahead and select any button labeled 1 to 16 to guess
+						the location of your opponent's ship. Once you have fired a canon towards it, it can either
+						splash in the water or be a successful hit. In the case of the latter, a victory message will
+						appear, letting you know that you have won the game and your progress will be saved on the
+						leader board. If you miss however, you must wait for your opponent to make their guess on 
+						the location of your ship before you are ready to fire again.
+					</p>
+
+					<!-- Quit Button -->
+					<div class="buttons is-centered">
+						<div class="my-5">
+							<button class="button is-medium is-danger is-rounded" onclick="window.location.href='/home';">
+								Quit
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>

@@ -1,0 +1,104 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Decide on the name in the tab here -->
+    <title>Login</title>
+
+    <!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+    <!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+      .fadeIn {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeInAnimation {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var email = $("#email");
+        (function () {
+          console.log(email);
+        });
+      });
+    </script>
+    <!-- Grab the navbar content from /src/navbar/navbar.html -->
+    <script>
+      $(function () {
+        $("#navbarContent").load("/templates/navbar.html");
+      });
+    </script>
+  </head>
+
+  <!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+  <body>
+    <!-- NavBar -->
+    <div id="navbarContent"></div>
+
+    <!-- Page Title -->
+
+    <!-- Landing Page Description -->
+    <div class="fadeIn">
+      <section class="hero">
+        <div class>
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-4-desktop is-3-widescreen my-6 py-6 is-centered">
+                <form action="/login" method="post" id="login-form" class="box">
+                  <h1 class="is-size-2 pb-3">Login</h1>
+                  <h6 class="is-size-6 pb-2 has-text-danger">{{error}}</h6>
+                  <div id="addCard">
+                  </div>
+
+                  <div class="field">
+                    <label for="" class="label">Email</label>
+                    <div class="control has-icons-left">
+                      <input name="email" id="emailInput" type="email" placeholder="e.g. bobsmith@gmail.com" class="input" onkeyup="CheckEmail();" required />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="" class="label">Password</label>
+                    <div class="control has-icons-left">
+                      <input name="password" id="password" type="password" placeholder="*******" class="input" onchange="" required />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="buttons is-centered my-1">
+                    <input type="submit" class="button is-primary is-centered is-fullwidth is-rounded is-primary"></input>
+                  </div>
+                  <div class="is-size-7-desktop is-size-6-mobile has-text-centered">Need an account? Sign up <a href="/signupForm">here</a>.</div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="/static/login.js"></script>
+  </body>
+  <!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>

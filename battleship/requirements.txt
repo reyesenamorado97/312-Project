@@ -1,0 +1,7 @@
+flask
+Flask-PyMongo
+pymongo
+bcrypt
+flask-socketio
+flask-login
+gevent-websocket

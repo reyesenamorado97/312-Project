@@ -1,0 +1,158 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Decide on the name in the tab here -->
+		<title>Home</title>
+
+		<!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+		<!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+		<style>
+			.fadeIn {
+				animation: fadeInAnimation ease 1s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
+
+			.test {
+				background-color: red;
+			}
+
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+
+			.leaderboard-padding {
+				padding-bottom: 15px;
+			}
+
+			.lobbies-scrollable {
+				border: 3px solid #4a4a4a;
+				border-radius: 0.25rem;
+				height: 440px;
+				width: 100%;
+				/* background-color:#CCC; */
+				overflow-y: auto;
+			}
+			.card-size {
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 10;
+				width: 96%;
+				/* background-color:#CCC; */
+			}
+			.card-color {
+				background: #a13ed047;
+				/* background-color:#CCC; */
+			}
+
+			.card-color:hover {
+				background-color: yellow;
+				cursor: hand;
+			}
+			.card-color.pointer {
+				cursor: grab;
+			}
+
+			.grow {
+				transition: all 0.2s ease-in-out;
+			}
+			.grow:hover {
+				transform: scale(1.02);
+			}
+
+			.table-size {
+				margin-left: auto;
+				margin-right: auto;
+				width: 90%;
+			}
+		</style>
+
+		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+		<!-- Grab the navbar content from /src/navbar/navbar.html -->
+		<script>
+			$(function () {
+				$("#navbarContent").load("/templates/navbar.html");
+			});
+		</script>
+	</head>
+
+	<!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+	<body>
+		<!-- NavBar -->
+		<div id="navbarContent"></div>
+		<h1 class="section is-size-1-desktop is-size-3-mobile fadeIn">Home</h1>
+
+		<!-- Home Page Content -->
+		<div class="section pt-1 mx-1 fadeIn">
+			<div class="container">
+				<div class="columns is-vcentered">
+					<!-- Lobbies Column -->
+					<div class="section column is-7 is-size-5-desktop is-size-6-mobile">
+						<!-- Row for column title and button -->
+						<div class="level">
+							<h2 class="is-size-2-desktop is-size-3-mobile">Open Lobbies</h2>
+							<div class="">
+								<button
+									class="button is-medium is-info is-rounded create-button"
+									onclick="window.location.href='/game';"
+								>
+									Create a Lobby
+								</button>
+							</div>
+						</div>
+
+						<div class="lobbies-scrollable">
+							<!-- Card for an Open Lobby -->
+							<div id="allCards"></div>
+						</div>
+						<!-- End of scrollable content -->
+					</div>
+					<!-- End of Lobbies Column -->
+
+					<!-- Column for leaderboard -->
+					<div class="section column is-5 is-size-5-desktop is-size-6-mobile">
+						<div>
+							<h1 class="is-size-2-desktop is-size-3-mobile leaderboard-padding">Leaderboard</h1>
+							<hr />
+						</div>
+
+						<!-- Start of Table -->
+						<table class="table table-size">
+							<!-- Header Content -->
+							<thead>
+								<tr>
+									<th>Rank</th>
+									<th>Username</th>
+									<th>Wins</th>
+								</tr>
+							</thead>
+
+							<!-- Table Data Goes Here -->
+							<tbody id="tableData">
+								
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/static/home.js"></script>
+	</body>
+
+	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>

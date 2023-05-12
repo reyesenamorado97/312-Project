@@ -1,0 +1,271 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Decide on the name in the tab here -->
+		<title>Battleship Game</title>
+
+		<!-- This forces the app to use Bulma CSS for styles
+		        Class name is provided by Bulma, so if you're looking for a style, 
+                you should search for a a Bulma classname that has the style you're looking for -->
+		<!-- Use this link for official docs: https://bulma.io/documentation/helpers/ -->
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+		<link rel="stylesheet2" href="/src/index/index.css" />
+		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+		<style>
+			.fadeIn {
+				animation: fadeInAnimation ease 1s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
+
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			.grid-container {
+				display: grid;
+				grid-template-columns: auto auto auto auto;
+				background-color: #2196f3;
+				padding: 10px;
+			}
+			.grid-item {
+				background-color: rgba(255, 255, 255, 0.8);
+				border: 1px solid rgba(0, 0, 0, 0.8);
+				padding: 10px;
+				font-size: 30px;
+				text-align: center;
+			}
+			.game-button {
+				border-radius: 40px;
+				background: #a5a5ff;
+			}
+		</style>
+
+		<!-- Import JQuery from Google to do React-like things (like inserting html from other html files) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+		<!-- Grab the navbar content from /src/navbar/navbar.html -->
+		<script>
+			$(function () {
+				$("#navbarContent").load("/templates/navbar.html");
+			});
+		</script>
+	</head>
+
+	<!----------------------------------------------- Page Content BEGINS ----------------------------------------------->
+	<body>
+		<!-- NavBar -->
+		<div id="navbarContent"></div>
+
+		<!-- Main Page Header -->
+		<h1 class="section is-size-2-desktop is-size-3-mobile fadeIn" id="opponent">Opponent: Waiting...</h1>
+
+
+		<!-- Landing Page Description -->
+		<div class="section pt-1 pb-0 mx-5 fadeIn">
+			<div class="container">
+				<div class="columns is-vcentered">
+					
+
+					<!-- Left Column Starts Here (Used to Hold Grid)-->
+					<div class="column is-7 is-size-5-mobile">
+						<div id="miss" class="is-size-4-desktop is-size-3-mobile fadeIn has-text-danger">&nbsp;</div>
+
+						<div class="grid-container">
+							<div class="grid-item" onclick="">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button1" onclick="pressAnyGameButton('button1');">
+											1
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button2" onclick="pressAnyGameButton('button2');">
+											2
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button3" onclick="pressAnyGameButton('button3');">
+											3
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button4" onclick="pressAnyGameButton('button4');">
+											4
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button5" onclick="pressAnyGameButton('button5');">
+											5
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button6" onclick="pressAnyGameButton('button6');">
+											6
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button7" onclick="pressAnyGameButton('button7');">
+											7
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button8" onclick="pressAnyGameButton('button8');">
+											8
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button9" onclick="pressAnyGameButton('button9');">
+											9
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button10" onclick="pressAnyGameButton('button10');">
+											10
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button11" onclick="pressAnyGameButton('button11');">
+											11
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button12" onclick="pressAnyGameButton('button12');">
+											12
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button13" onclick="pressAnyGameButton('button13');">
+											13
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button14" onclick="pressAnyGameButton('button14');">
+											14
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button15" onclick="pressAnyGameButton('button15');">
+											15
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item">
+								<div class="buttons is-centered">
+									<div class="my-5">
+										<button class="button game-button is-medium" id="button16" onclick="pressAnyGameButton('button16');">
+											16
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div class="buttons is-centered">
+							<div class="my-5">
+								<button
+									class="button is-medium is-primary is-rounded"
+									onclick="window.location.href='/auth/loginForm';"
+								>
+									Submit
+								</button>
+							</div>
+						</div> -->
+					</div>
+
+					<!-- Right Column Starts Here (Used For Rules and Quitting)-->
+					<div class="column mx-7 is-5 is-centered ">
+						<h2 class="is-size-4-desktop is-size-3-mobile pb-3 fadeIn">How to Play</h2>
+
+						<p>
+							Battleship is a game where two players compete to try to sink their opponent's ship first!
+							This game is a simplified version where the location of your ship and your opponent's ship
+							has already been chosen for you. It is represented by one coordinate in the four by four 
+							grid that appears on your screen. Go ahead and select any button labeled 1 to 16 to guess
+							the location of your opponent's ship. Once you have fired a canon towards it, it can either
+							splash in the water or be a successful hit. In the case of the latter, a victory message will
+							appear, letting you know that you have won the game and your progress will be saved on the
+							leader board. If you miss however, you must wait for your opponent to make their guess on 
+							the location of your ship before you are ready to fire again.
+						</p>
+						<!-- <div class="buttons is-centered">
+							<div class="my-5">
+								<button class="button is-medium is-danger is-rounded" onclick="window.location.href='/home';">
+									Quit
+								</button>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+		<script src="/static/game.js"></script>
+	</body>
+	<!------------------------------------------------ Page Content ENDS ------------------------------------------------>
+</html>
