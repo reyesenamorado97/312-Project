@@ -3,8 +3,16 @@ let youAre;
 var socket = io.connect('http://localhost:8000');
 
 socket.on('room', function(data){
-    room = JSON.parse(data).room;
-    youAre=JSON.parse(data).youAre;
+    data=JSON.parse(data)
+    room = data.room;
+    youAre=data.youAre;
+    if (data.start){
+        buttonsMap.forEach((value, key) => {
+            if (!pressedButtons.includes(key)) {
+                value.disabled = false;
+            }
+        });
+    }
 })
 socket.on('connect', function(){
     console.log("connected to web sockets")
@@ -27,8 +35,6 @@ socket.on('gameResponse', function (message) {
         console.log("hi") 
         // Reenable all the buttons that have not been pressed yet 
         buttonsMap.forEach((value, key) => {
-            
-            
             if (!pressedButtons.includes(key)) {
                 value.disabled = false;
             }
@@ -123,4 +129,5 @@ async function pressAnyGameButton(buttonId) {
     socket.emit('button', {'user':youAre, 'button': buttonId , 'room': room})
 }
 
-// need ajax for  for
+//start disabled
+disableAllGameButtons()

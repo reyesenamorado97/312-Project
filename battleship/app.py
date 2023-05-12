@@ -15,6 +15,7 @@ database = Database_Handler()
 future_users={}
 room_num=[0]
 game_rooms={}
+list_rooms=set()
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -33,7 +34,6 @@ class User(UserMixin):
         self.wins = database.find_user(self.username)["wins"]
         # self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
-        self.room=None
 
     def is_authenticated(self):
         return True
@@ -60,8 +60,6 @@ class User(UserMixin):
         )
         # also increments
         self.wins += 1
-    def changeroom(self,new_room):
-        self.room=new_room
 
 
 @login_manager.user_loader
@@ -204,7 +202,7 @@ def edit():
 @app.route("/currentGames")
 @login_required
 def send_rooms():
-    rooms = {"rooms": list(game_rooms.keys())}
+    rooms = {"rooms": list(list_rooms)}
     print(rooms)
     return jsonify(rooms)
 
@@ -229,15 +227,12 @@ def game():
 @app.route('/game/<room>')
 @ login_required
 def join_game(room):
-    # print('yes motherfluckers')
-    # print("room",room)
-    # print("current User",current_user)
-    # current_user.changeroom(room)
-    # print('update user room', current_user.room)
-
-    # print('username',current_user.username)
-    future_users[current_user.username]=room
-    return render_template("game.html")
+    print(list_rooms)
+    if room in list_rooms:
+        future_users[current_user.username]=room
+        list_rooms.remove(room)
+        return render_template("game.html")
+    return redirect("/home", code=301)
 
 
 ### Websocket Stuff ###
@@ -246,25 +241,28 @@ def join_game(room):
 @login_required
 def connect():
     room=''
+    start=False
+    user=current_user.username
     print("current user on sid",current_user)
-    print("user room",current_user.room)
-    print('username',current_user.username)
-    if current_user.username in future_users:
-        room=future_users[current_user.username]
-        del future_users[current_user.username]
+    print('username',user)
+    if user in future_users:
+        room=future_users[user]
+        del future_users[user]
         win_button=random.randint(1,16)
-        game_rooms[room][0].append(request.sid)
+        game_rooms[room][0].append(user)
         game_rooms[room][1].append(win_button)
+        start=True
         join_room(room)
     else:
         room='room'+str(room_num[0])
         room_num[0]+=1
         win_button=random.randint(1,16)
-        game_rooms[room]=[[request.sid],[win_button]]
+        game_rooms[room]=[[user],[win_button]]
+        list_rooms.add(room)
         join_room(room)
 
 
-    test=json.dumps({"room":room,'youAre':request.sid})
+    test=json.dumps({"room":room,'youAre':user, "start":start})
     emit('room',test,to=request.sid)
     pass
 
@@ -290,11 +288,13 @@ def socket_message(data):
         if button==info[1][1]:
             ans['winner']=info[0][0]
             del game_rooms[room]
+            current_user.increment_wins()
         emit('gameResponse',ans,to=room)
     else:
         if button==info[1][0]:
             ans['winner']=info[0][1]
             del game_rooms[room]
+            current_user.increment_wins()
         emit('gameResponse',ans,to=room)
     pass
 
