@@ -81,14 +81,14 @@ def create_response(arg):
 @app.route("/")
 def hello_world():
     if current_user.is_authenticated:
-        return create_response(redirect("/home"), code=301)
+        return create_response(redirect("/home", code=301))
     return create_response(redirect("/welcome", code=301))
 
 
 @app.route("/welcome")
 def welcome():
     if current_user.is_authenticated:
-        return create_response(redirect("/home"), code=301)
+        return create_response(redirect("/home", code=301))
     return create_response(render_template("welcome.html"))
 
 
