@@ -121,7 +121,7 @@ def register():
             username=username, password=password)
         # user_collection.insert_one(profile)
         if registered:
-            return redirect("/home", code=301)
+            return redirect("/loginForm", code=301)
 
         test = "Username Already in Use"
         return render_template("signup.html", error=test)
@@ -303,4 +303,4 @@ def socket_message(data):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, host='0.0.0.0',port=8000)
+    socketio.run(app, debug=True, host='0.0.0.0')
