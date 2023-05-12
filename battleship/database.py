@@ -36,7 +36,6 @@ class Database_Handler():
         user = self.users_collection.find_one({'username': username})
         if user:
             return bcrypt.checkpw(password.encode(), user['password'])
-        print("User does not exist.")
         return False
 
     def find_user(self, username):

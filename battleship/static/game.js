@@ -17,7 +17,6 @@ socket.on('room', function(data){
 })
 socket.on('players', function(data){
     data=JSON.parse(data)
-    console.log(data)
     if (data.p1==youAre){
         update_opponent(data.p2)
     }
@@ -27,24 +26,22 @@ socket.on('players', function(data){
 })
 
 socket.on('connect', function(){
-    console.log("connected to web sockets")
+    // console.log("connected to web sockets")
 });
 
 socket.on('disconnect', function(){
-    console.log("disconnected to web sockets")
+    // console.log("disconnected to web sockets")
 });
 
 socket.on('user', function (message) {
-    console.log('Hi')
-    console.log(message)
+    // console.log('Hi')
+    // console.log(message)
 });
 
 // Runs when server responds 
 socket.on('gameResponse', function (message) {
    // message=JSON.parse(message);
-    console.log(message)
     if (message.user!=youAre){
-        console.log("hi") 
         // Reenable all the buttons that have not been pressed yet 
         buttonsMap.forEach((value, key) => {
             if (!pressedButtons.includes(key)) {
@@ -135,7 +132,6 @@ function update_opponent(opp){
 
 // Runs whenever a game button is pressed
 async function pressAnyGameButton(buttonId) {
-    console.log(buttonId)
     missText.innerHTML = "Waiting...";
     // Add the id of this button to the list of pressed buttons
     pressedButtons.push(buttonId)

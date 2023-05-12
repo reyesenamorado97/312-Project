@@ -6,5 +6,4 @@ function UpdateEmail(){}
 function CheckEmail() {
 
     email = document.getElementById('emailInput').value
-    console.log(email)
 }

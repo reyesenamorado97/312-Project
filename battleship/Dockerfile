@@ -1,4 +1,4 @@
-FROM python:3.8.2
+FROM python:3.8
 
 #RUN apt-get update
 
@@ -12,14 +12,15 @@ WORKDIR /root
 COPY . .
 
 #Download dependecies
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 #Allow  port 5000 to be accesed
 #from outside the container
 EXPOSE 5000
+EXPOSE 27017
 
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
 RUN chmod +x /wait
 
 #Run the app
-CMD /wait && python3 -u  app.py
+CMD /wait && python3 -u app.py

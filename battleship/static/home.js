@@ -21,7 +21,6 @@ function getCards() {
 	request.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			const rooms = JSON.parse(this.response);
-			console.log("attempts", rooms.rooms);
 			for (let i = 0; i < rooms.rooms.length; i++) {
 				loadCard(rooms.rooms[i]);
 			}
@@ -46,7 +45,6 @@ function getLeaderboard() {
 		if (this.readyState === 4 && this.status === 200) {
 			const leader = JSON.parse(this.response);
 			for (let i = 0; i < leader.length; i++) {
-				console.log(leader[i].wins)
 				loadLeaderboard(i+1, leader[i].username, leader[i].wins)
 			}
 		}
