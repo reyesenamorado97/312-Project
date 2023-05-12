@@ -1,5 +1,6 @@
 let room;
 let youAre;
+
 var socket = io.connect('http://localhost:8000');
 
 socket.on('room', function(data){
@@ -14,6 +15,17 @@ socket.on('room', function(data){
         });
     }
 })
+socket.on('players', function(data){
+    data=JSON.parse(data)
+    console.log(data)
+    if (data.p1==youAre){
+        update_opponent(data.p2)
+    }
+    else{
+        update_opponent(data.p1)
+    }
+})
+
 socket.on('connect', function(){
     console.log("connected to web sockets")
 });
@@ -114,6 +126,11 @@ function winGame() {
 
 function loseGame() {
     alert("You lost!")
+}
+
+function update_opponent(opp){
+    const opponent = document.getElementById("opponent")
+    opponent.innerHTML="Opponent: "+ opp
 }
 
 // Runs whenever a game button is pressed
