@@ -1,7 +1,7 @@
 let room;
 let youAre;
 
-var socket = io.connect('http://localhost:8000');
+var socket = io.connect('http://localhost:5000');
 
 socket.on('room', function(data){
     data=JSON.parse(data)
@@ -52,7 +52,7 @@ socket.on('gameResponse', function (message) {
             }
         });
         
-        missText.innerHTML = "You missed their ship!";
+        missText.innerHTML = "They missed your ship!";
     }
     if (message.winner==youAre) {
         missText.innerHTML = "You Won!";
