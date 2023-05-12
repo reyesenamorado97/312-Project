@@ -164,7 +164,7 @@ def login():
                 return redirect("/home", code=301)
             return redirect(next_page, code=301)
 
-    return render_template("login.html")
+    return render_template("login.html", error="Incorrect Credentials")
 
 
 @app.route("/logout")
