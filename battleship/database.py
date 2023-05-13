@@ -8,7 +8,7 @@ import bcrypt
 
 class Database_Handler():
     def __init__(self):
-        self.mongo_client = MongoClient("mongo")
+        self.mongo_client = MongoClient("localhost:27017")
         self.db = self.mongo_client["Battleship"]
         self.users_collection = self.db["users"]
 

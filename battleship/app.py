@@ -193,7 +193,7 @@ def edit():
 @login_required
 def send_rooms():
     rooms = {"rooms": list(list_rooms)}
-    return create_response(jsonify(rooms))
+    return jsonify(rooms)
 
 
 @app.route("/leaderboard")
@@ -287,4 +287,4 @@ def socket_message(data):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, host='0.0.0.0')
+    socketio.run(app, debug=True, host='0.0.0.0',port=8000)
